@@ -5,7 +5,7 @@ function load(){
     fs.readdirSync("./userDatas/").forEach((name) => {
         fs.readFile(name, 'utf8', (e, data) => {
             if(!e){
-                result.set(JSON.parse(data))
+                result.set(name.split(".")[0], JSON.parse(data))
             }
         })
     })
