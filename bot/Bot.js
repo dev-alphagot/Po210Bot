@@ -3,7 +3,7 @@ const client = new discord.Client();
 var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
-var userStats = new HashMap()
+var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
 
 usage.lookup(process.pid, (e, d) => {
