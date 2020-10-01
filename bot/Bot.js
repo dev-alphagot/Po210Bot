@@ -3,6 +3,8 @@ const client = new discord.Client();
 var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
+var userStats = new HashMap()
+const dataLoader = require("./statusModule/loader")
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
@@ -23,6 +25,8 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 
 client.on("ready", () => {
   console.log("Bot is online!");
+  userStats = dataLoader.load()
+  console.log("debug/userData -> \n" + userStats)
 });
 
 client.on("message", res => {
