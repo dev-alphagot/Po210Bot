@@ -5,12 +5,31 @@ var usageObj = Object()
 var ver = process.env.version
 var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
+const readline = require("readline")
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
     usageObj = d
   }else{
     console.log("usage-lookup/e, text -> " + e.toString())
+  }
+})
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+rl.setPrompt("po210 Console|#")
+rl.prompt()
+rl.on("line", (data) => {
+  switch(data.split(" ")[0]){
+    case "reload":
+      process.exit(-1)
+      break
+    default:
+      console.log("Bad command or file name")
+      break
   }
 })
 
