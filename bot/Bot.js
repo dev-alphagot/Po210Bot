@@ -31,7 +31,7 @@ client.on("message", res => {
   switch (argv[0]) {
     case "po!usages":
       var ram = `${(usageObj.memory / 1048576).toString().split(".")[0]} MiB + ${((usageObj.memory - (parseInt((usageObj.memory / 1048576).toString().split(".")[0]) * 1048576)) / 1024).toString().split(".")[0]} KiB`
-      var text = `CPU 사용량: ${process.cpuUsage().system}%\nRAM 사용량: ${ram}`
+      var text = `CPU 사용량: ${process.cpuUsage().user}%\nRAM 사용량: ${ram}`
       sendEmbed(res, 0x00FF00, "성공 - 사용량 출력", text)
       break
   }
