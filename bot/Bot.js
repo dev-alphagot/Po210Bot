@@ -26,7 +26,7 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 client.on("ready", () => {
   console.log("Bot is online!");
   userStats = dataLoader.load()
-  console.log("debug/userData -> \n" + userStats)
+  console.log("debug/userData -> \n" + userStats.toString())
 });
 
 client.on("message", res => {
