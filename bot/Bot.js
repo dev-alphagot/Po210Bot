@@ -18,7 +18,7 @@ function sendEmbed(res, color, title, desc){
     .setTitle(title)
     .setDescription(desc)
     .setFooter(`Po₂₁₀ Bot ${ver}`)
-  res.channel.send(tmp)
+  res.channel.send(tmp) 
 }
 
 client.on("ready", () => {
