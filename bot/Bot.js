@@ -59,6 +59,7 @@ client.on("message", res => {
       }else{
         sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류를 입력하지 않음", "분류가 입력되지 않음.")
       }
+      break
   }
 });
 
