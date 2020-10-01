@@ -26,7 +26,7 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 client.on("ready", () => {
   console.log("Bot is online!");
   userStats = dataLoader.load()
-  console.log("debug/userData -> \n" + userStats)
+  console.log("debug/userData -> \n" + userStats.toString())
 });
 
 client.on("message", res => {
@@ -59,6 +59,7 @@ client.on("message", res => {
       }else{
         sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류를 입력하지 않음", "분류가 입력되지 않음.")
       }
+      break
   }
 });
 
