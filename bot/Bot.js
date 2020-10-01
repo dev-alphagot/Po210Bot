@@ -13,7 +13,7 @@ usage.lookup(process.pid, (e, d) => {
 })
 
 function sendEmbed(res, color, title, desc){
-  var tmp = new discord.MessageEmbed()
+  var tmp = new discord.RichEmbed()
     .setColor(color)
     .setTitle(title)
     .setDescription(desc)
