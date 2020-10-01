@@ -34,6 +34,9 @@ client.on("message", res => {
       var text = `CPU 사용량: ${process.cpuUsage().user}%\nRAM 사용량: ${ram}`
       sendEmbed(res, 0x00FF00, "성공 - 사용량 출력", text)
       break
+    case "po!info":
+      sendEmbed(res, 0x00FF00, "성공 - 봇 정보", `개발자: Kotlin-1.4.10#2214\n봇 리포지토리: https://github.com/shs3182ym/Po210Bot (GPLv3)`)
+      break
   }
 });
 
