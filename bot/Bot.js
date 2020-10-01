@@ -30,8 +30,8 @@ client.on("message", res => {
   var argv = msg.split(" ");
   switch (argv[0]) {
     case "po!usages":
-      var ram = `${(usageObj.memory / 1048576).split(".")[0]} MiB + ${((usageObj.memory - (usageObj.memory / 1048576 * 1048576)) / 1024).split(".")[0]} KiB`
-      var vmm = `${(usageObj.memoryInfo.vsize / 1048576).split(".")[0]} MiB + ${((usageObj.memoryInfo.vsize - (usageObj.memoryInfo.vsize / 1048576 * 1048576)) / 1024).split(".")[0]} KiB`
+      var ram = `${(usageObj.memory / 1048576).toString().split(".")[0]} MiB + ${((usageObj.memory - (parseInt((usageObj.memory / 1048576).toString().split(".")[0]) * 1048576)) / 1024).toString().split(".")[0]} KiB`
+      var vmm = `${(usageObj.memoryInfo.vsize / 1048576).toString().split(".")[0]} MiB + ${((usageObj.memoryInfo.vsize - (Integer.parseInt((usageObj.memoryInfo.vsize / 1048576).toString().split(".")[0]) * 1048576)) / 1024).split(".")[0]} KiB`
       var text = `CPU 사용량: ${usageObj.cpu}\nRAM 사용량: ${ram}\n가상 메모리 사용량: ${vmm}`
       sendEmbed(res, 0x00FF00, "성공 - 사용량 출력", text)
       break
