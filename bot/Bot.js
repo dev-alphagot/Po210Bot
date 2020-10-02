@@ -5,12 +5,17 @@ var usageObj = Object()
 var ver = process.env.version
 var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
-const readline = require("readline")
+const readline = require("readline");
+const { exec } = require("child_process");
 const cron = require("cron").CronJob
-var job = new CronJob('*/5 * * * *', function() {
+var job = new cron('*/5 * * * *', function() {
   console.log('You will see this message every 5 minutes');
+  exec("node main.js", (e, o, oe) => {
+    console.log(e, o, oe)
+  })
 }, null, true, 'Asia/Seoul');
 job.start();
+var childProcess = require("child_process").exec
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
