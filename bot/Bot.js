@@ -5,6 +5,7 @@ var usageObj = Object()
 var ver = process.env.version
 var userStats = new HashMap()
 const dataLoader = require("./statusModule/loader")
+const moneyManager = require("./wtatusModule/moneyManager")
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
