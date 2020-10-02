@@ -6,7 +6,7 @@ var ver = process.env.version
 var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
 const readline = require("readline")
-const cron = require("cron")
+const cron = require("cron").CronJob
 var job = new CronJob('*/5 * * * *', function() {
   console.log('You will see this message every 5 minutes');
 }, null, true, 'Asia/Seoul');
