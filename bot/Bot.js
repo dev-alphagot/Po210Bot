@@ -6,6 +6,11 @@ var ver = process.env.version
 var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
 const readline = require("readline")
+const cron = require("cron")
+var job = new CronJob('*/5 * * * *', function() {
+  console.log('You will see this message every 5 minutes');
+}, null, true, 'Asia/Seoul');
+job.start();
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
@@ -20,7 +25,7 @@ const rl = readline.createInterface({
   output: process.stdout
 })
 
-rl.setPrompt("po210 Console|#")
+rl.setPrompt("po210 Console|# ")
 rl.prompt()
 rl.on("line", (data) => {
   switch(data.split(" ")[0]){
