@@ -3,15 +3,47 @@ const client = new discord.Client();
 var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
-var userStats = new HashMap()
+var userStats = new Map()
 const dataLoader = require("./statusModule/loader")
+<<<<<<< HEAD
 const moneyManager = require("./wtatusModule/moneyManager")
+=======
+const readline = require("readline");
+const { exec } = require("child_process");
+const cron = require("cron").CronJob
+var job = new cron('*/5 * * * *', function() {
+  console.log('You will see this message every 5 minutes');
+  exec("node main.js", (e, o, oe) => {
+    console.log(e, o, oe)
+  })
+}, null, true, 'Asia/Seoul');
+job.start();
+var childProcess = require("child_process").exec
+>>>>>>> d5c9cf447261702b484b7c44d7d0939185beab3f
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
     usageObj = d
   }else{
     console.log("usage-lookup/e, text -> " + e.toString())
+  }
+})
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+rl.setPrompt("po210 Console|# ")
+rl.prompt()
+rl.on("line", (data) => {
+  switch(data.split(" ")[0]){
+    case "reload":
+      process.exit(-1)
+      break
+    default:
+      console.log("Bad command or file name")
+      break
   }
 })
 
@@ -27,7 +59,9 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 client.on("ready", () => {
   console.log("Bot is online!");
   userStats = dataLoader.load()
-  console.log("debug/userData -> \n" + userStats)
+  for(let [k, v] of userStats){
+    console.log(k + " -> " + JSON.stringify(v))
+  }
 });
 
 client.on("message", res => {
@@ -60,6 +94,7 @@ client.on("message", res => {
       }else{
         sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류를 입력하지 않음", "분류가 입력되지 않음.")
       }
+      break
   }
 });
 
