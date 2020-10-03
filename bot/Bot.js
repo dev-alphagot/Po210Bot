@@ -4,7 +4,7 @@ var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
 var userStats = new Map()
-const dataLoader = require("./statusModule/loader")
+const dataLoader = require("./statusModule/loader");
 const moneyManager = require("./wtatusModule/moneyManager")
 
 usage.lookup(process.pid, (e, d) => {
@@ -48,6 +48,16 @@ client.on("ready", () => {
   for(let [k, v] of userStats){
     console.log(k + " -> " + JSON.stringify(v))
   }
+  console.log(moneyToString(2))
+  console.log(moneyToString(2 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
 });
 
 client.on("message", res => {
