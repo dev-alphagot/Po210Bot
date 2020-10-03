@@ -49,16 +49,16 @@ client.on("ready", () => {
   for(let [k, v] of userStats){
     console.log(k + " -> " + JSON.stringify(v))
   }
-  console.log(moneyToString(2))
-  console.log(moneyToString(2 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2))
+  console.log(moneyManager.moneyToString(2 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
+  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
 });
 
 client.on("message", res => {
