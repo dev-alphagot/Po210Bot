@@ -4,6 +4,7 @@ var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
 var userStats = new Map()
+const readline = require("readline")
 const dataLoader = require("./statusModule/loader");
 const moneyManager = require("./statusModule/moneyManager")
 
