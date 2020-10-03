@@ -20,7 +20,7 @@ function moneyToString(raw){
         for(var i = 1; i < 10; i++){
             j = raw / Math.pow(10000, i)
             if(j < 1){
-                return Math.floor(j * 10000) + " " + prefix.prefix[i - 1] + prefix.default + " " + moneyToString(raw - Math.floor(j * Math.pow(10000, i)))
+                return Math.floor(j * 10000) + " " + prefix.prefix[i - 1] + " " + moneyToString(raw - Math.floor(j * Math.pow(10000, i)))
             }
         }
     }else{
