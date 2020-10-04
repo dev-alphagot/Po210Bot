@@ -17,7 +17,7 @@ function isUserExist(id){
 }
 
 function save(id, data){
-    fs.writeFileSync(`./userDatas/${id}.json`, JSON.stringify(data))
+    fs.writeFileSync(`./userDatas/${id}.json`, JSON.stringify(data).toString())
 }
 
 module.exports = {
