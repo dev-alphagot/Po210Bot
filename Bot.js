@@ -99,7 +99,7 @@ client.on("message", res => {
         switch(argv[1]){
           case "mymoney":
             if(dataLoader.isUserExist(res.author.id)){
-              sendEmbed(res, 0x00FF00, "성공 - 현재 보유한 돈 출력", `현재 보유한 돈: ${moneyManager.moneyToString(userStats.get(res.author.id))}`)
+              sendEmbed(res, 0x00FF00, "성공 - 현재 보유한 돈 출력", `현재 보유한 돈: ${moneyManager.moneyToString(userStats.get(res.author.id).gots)}`)
             }else{
               sendEmbed(res, 0xFF0000, "실패 - 현재 보유한 돈 출력", "계좌가 존재하지 않음. ```po!eco createacc```")
             }
