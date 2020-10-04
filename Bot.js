@@ -5,7 +5,7 @@ var usageObj = Object()
 var ver = process.env.version
 var userStats = new Map()
 const readline = require("readline")
-const dataLoader = require("./statusModule/loader");
+const dataLoader = require("./statusModule/dataManager");
 const moneyManager = require("./statusModule/moneyManager")
 
 usage.lookup(process.pid, (e, d) => {
@@ -39,7 +39,7 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
     .setColor(color)
     .setTitle(title)
     .setDescription(desc)
-    .setFooter(`Po₂₁₀ Bot / Version = ${ver}`)
+    .setFooter(`Po210Bot | Version = ${ver}`)
   res.channel.send(tmp)
 }
 
@@ -58,7 +58,6 @@ client.on("ready", () => {
   console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
   console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
   console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
-  console.log(moneyManager.moneyToString(2 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000 * 10000))
 });
 
 client.on("message", res => {
@@ -83,13 +82,43 @@ client.on("message", res => {
             sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/단순응답 명령어", "info = 개발자 정보 및 GitHub 리포지토리 출력")
             break
           case "eco":
-            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/가상경제 명령어", "해당 분류에 들어가는 명령어가 존재하지 않음.")
+            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/가상경제 명령어", "모든 명령어는 po!eco로 시작\n* 표시 = 계좌 생성 요구\n\nmymoney * = 현재 보유한 돈 확인\ncreateacc = 계좌 생성")
             break
           default:
             sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류 없음", "해당 분류가 존재하지 않음.")
         }
       }else{
         sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류를 입력하지 않음", "분류가 입력되지 않음.")
+      }
+      break
+    case "po!eco":
+      if(dataLoader.isUserExist(res.author.id)){
+        dataLoader.save(res.author.id, userStats.get(res.author.id))
+      }
+      if(argv.length > 1){
+        switch(argv[1]){
+          case "mymoney":
+            if(dataLoader.isUserExist(res.author.id)){
+              sendEmbed(res, 0x00FF00, "성공 - 현재 보유한 돈 출력", `현재 보유한 돈: ${moneyManager.moneyToString(userStats.get(msg.author.id))}`)
+            }else{
+              sendEmbed(res, 0xFF0000, "실패 - 현재 보유한 돈 출력", "계좌가 존재하지 않음. (```po!eco createacc```)")
+            }
+            break
+          case "createacc":
+            if(!dataLoader.isUserExist(res.author.id)){
+              userStats.set(res.author.id, {
+                "name": res.author.username,
+                "gots": 10000
+              })
+              dataLoader.save(res.author.id, userStats.get(res.author.id))
+              sendEmbed(res, 0x00FF00, "성공 - 계좌 생성", `계좌 생성 성공.`)
+            }else{
+              sendEmbed(res, 0xFF0000, "실패 - 계좌 생성", "계좌가 이미 존재함.")
+            }
+            break
+        }
+      }else{
+        sendEmbed(res, 0xFF0000, "실패 - 경제 명령어", "명령어가 지정되지 않음.")
       }
       break
   }

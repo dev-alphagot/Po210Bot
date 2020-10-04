@@ -12,6 +12,16 @@ function load(){
     return result
 }
 
+function isUserExist(id){
+    return fs.existsSync(`./userDatas/${id}.json`)
+}
+
+function save(id, data){
+    fs.writeFileSync(`./userDatas/${id}.json`, JSON.stringify(data))
+}
+
 module.exports = {
-    load
+    load,
+    save,
+    isUserExist
 }
