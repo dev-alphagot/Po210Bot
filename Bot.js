@@ -45,7 +45,9 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 
 client.on("ready", () => {
   console.log("Bot is online!");
-  userStats = dataLoader.load()
+  for(let [k, v] of dataLoader.load()){
+    userStats.set(k, v)
+  }
   for(let [k, v] of userStats){
     console.log(k + " -> " + JSON.stringify(v))
   }
