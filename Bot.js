@@ -3,10 +3,10 @@ const client = new discord.Client();
 var usage = require('usage');
 var usageObj = Object()
 var ver = process.env.version
-var userStats = new Map()
+var userStats = new Map([["template", {"name": "goza", "gots": 1}]])
 const readline = require("readline")
-const dataLoader = require("./statusModule/dataManager");
-const moneyManager = require("./statusModule/moneyManager")
+const dataLoader = require("./dataManager");
+const moneyManager = require("./moneyManager")
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
@@ -28,6 +28,9 @@ rl.on("line", (data) => {
     case "reload":
       process.exit(-1)
       break
+    case "debug":
+      console.log(userStats)
+      break
     default:
       console.log("Bad command or file name")
       break
@@ -45,12 +48,6 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 
 client.on("ready", () => {
   console.log("Bot is online!");
-  for(let [k, v] of dataLoader.load()){
-    userStats.set(k, v)
-  }
-  for(let [k, v] of userStats){
-    console.log(k + " -> " + JSON.stringify(v))
-  }
   console.log(moneyManager.moneyToString(2))
   console.log(moneyManager.moneyToString(2 * 10000))
   console.log(moneyManager.moneyToString(2 * 10000 * 10000))
@@ -94,25 +91,24 @@ client.on("message", res => {
       }
       break
     case "po!eco":
-      if(dataLoader.isUserExist(res.author.id)){
-        dataLoader.save(res.author.id, userStats.get(res.author.id))
-      }
+      if(dataLoader.isUserExist(res.author.id.toString())) dataLoader.save(res.author.id.toString(), userStats.get(res.author.id.toString()))
       if(argv.length > 1){
         switch(argv[1]){
           case "mymoney":
-            if(dataLoader.isUserExist(res.author.id)){
-              sendEmbed(res, 0x00FF00, "성공 - 현재 보유한 돈 출력", `현재 보유한 돈: ${moneyManager.moneyToString(userStats.get(res.author.id).gots)}`)
+            if(dataLoader.isUserExist(res.author.id.toString())){
+              sendEmbed(res, 0x00FF00, "성공 - 현재 보유한 돈 출력", `현재 보유한 돈: ${moneyManager.moneyToString(userStats.get(res.author.id.toString()).gots)}`)
             }else{
+              userStats.set(res.author.id.toString(), dataLoader.load(res.author.id.toString()))
               sendEmbed(res, 0xFF0000, "실패 - 현재 보유한 돈 출력", "계좌가 존재하지 않음. ```po!eco createacc```")
             }
             break
           case "createacc":
-            if(!dataLoader.isUserExist(res.author.id)){
-              userStats.set(res.author.id, {
+            if(!dataLoader.isUserExist(res.author.id.toString())){
+              userStats.set(res.author.id.toString(), {
                 "name": res.author.username,
                 "gots": 10000
               })
-              dataLoader.save(res.author.id, userStats.get(res.author.id))
+              dataLoader.save(res.author.id.toString(), userStats.get(res.author.id.toString()))
               sendEmbed(res, 0x00FF00, "성공 - 계좌 생성", `계좌 생성 성공.`)
             }else{
               sendEmbed(res, 0xFF0000, "실패 - 계좌 생성", "계좌가 이미 존재함.")
