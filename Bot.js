@@ -83,10 +83,10 @@ client.on("message", res => {
             sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/디버그 명령어", "usages = 시스템 자원 사용량 출력")
             break
           case "text":
-            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/단순응답 명령어", "info = 개발자 정보 및 GitHub 리포지토리 출력")
+            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/단순응답 명령어", "info = 개발자 정보 및 GitHub 리포지토리 출력\nupdates = 업데이트 내역 출력")
             break
           case "eco":
-            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/가상경제 명령어", "모든 명령어는 po!eco로 시작\n* 표시 = 계좌 생성 요구\n\nmymoney * = 현재 보유한 돈 확인\ncreateacc = 계좌 생성")
+            sendEmbed(res, 0x00FF00, "성공 - 도움말 출력/가상경제 명령어", "모든 명령어는 po!eco로 시작\n* 표시 = 계좌 생성 요구\n\nmymoney * = 현재 보유한 돈 확인\ncreateacc = 계좌 생성\nyacht * = 야추 게임")
             break
           default:
             sendEmbed(res, 0xFF0000, "실패 - 도움말 출력/분류 없음", "해당 분류가 존재하지 않음.")
