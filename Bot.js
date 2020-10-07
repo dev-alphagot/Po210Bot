@@ -7,6 +7,8 @@ var userStats = new Map([["template", {"name": "goza", "gots": 1}]])
 const readline = require("readline")
 const dataLoader = require("./dataManager");
 const moneyManager = require("./moneyManager")
+const yacht = require("./yachtAPI")
+var update
 
 usage.lookup(process.pid, (e, d) => {
   if(!e){
@@ -48,6 +50,8 @@ function sendEmbed(res, color = 0, title = "지정되지 않은 타이틀", desc
 
 client.on("ready", () => {
   console.log("Bot is online!");
+  update = JSON.parse(fs.readFileSync("updates.json"))
+  ver = update.version
   console.log(moneyManager.moneyToString(2))
   console.log(moneyManager.moneyToString(2 * 10000))
   console.log(moneyManager.moneyToString(2 * 10000 * 10000))
@@ -62,6 +66,7 @@ client.on("ready", () => {
 client.on("message", res => {
   var msg = res.content;
   var argv = msg.split(" ");
+  var argc = argv.length
   switch (argv[0]) {
     case "po!usages":
       var ram = `${(usageObj.memory / 1048576).toString().split(".")[0]} MiB + ${((usageObj.memory - (parseInt((usageObj.memory / 1048576).toString().split(".")[0]) * 1048576)) / 1024).toString().split(".")[0]} KiB`
@@ -114,10 +119,38 @@ client.on("message", res => {
               sendEmbed(res, 0xFF0000, "실패 - 계좌 생성", "계좌가 이미 존재함.")
             }
             break
+          case "yacht":
+            if(argc > 2){
+              if(argv[2] == "host"){
+                if(argc > 3){
+                  return
+                }else{
+                  sendEmbed(res, 0xFF0000, "실패 - 야추", "점당 몇 곶인 지 입력되지 않음.")
+                }
+              }
+            }else{
+              sendEmbed(res, 0xFF0000, "실패 - 야추", "호스트 / 게스트 여부 입력되지 않음.")
+            }
         }
       }else{
         sendEmbed(res, 0xFF0000, "실패 - 경제 명령어", "명령어가 지정되지 않음.")
       }
+      break
+    case "po!updates":
+      let textgen = "명령어 추가: \n - " +
+        update.new.join("\n - ") +
+        "명령어 제거: \n - " +
+        update.deleted.join("\n - ") + 
+        "명령어 변경: \n - " +
+        update.changed.join("\n - ") +
+        "기타 변경사항: \n - " +
+        update.etc.join("\n - ")
+      let embed = new discord.RichEmbed()
+        .setTitle("성공 - 업데이트 내역 확인")
+        .setFooter(`Po210 Bot | Version = ${ver}`)
+        .setDescription(textgen)
+        .setColor(0x00FF00)
+      res.channel.send(embed)
       break
   }
 });
