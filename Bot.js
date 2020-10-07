@@ -140,11 +140,11 @@ client.on("message", res => {
     case "po!updates":
       let textgen = "명령어 추가: \n - " +
         update.new.join("\n - ") +
-        "명령어 제거: \n - " +
+        "\n명령어 제거: \n - " +
         update.deleted.join("\n - ") + 
-        "명령어 변경: \n - " +
+        "\n명령어 변경: \n - " +
         update.changed.join("\n - ") +
-        "기타 변경사항: \n - " +
+        "\n기타 변경사항: \n - " +
         update.etc.join("\n - ")
       let embed = new discord.RichEmbed()
         .setTitle("성공 - 업데이트 내역 확인")
