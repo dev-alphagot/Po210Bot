@@ -8,6 +8,7 @@ const readline = require("readline")
 const dataLoader = require("./dataManager");
 const moneyManager = require("./moneyManager")
 const yacht = require("./yachtAPI")
+const fs = require("fs")
 var update
 
 usage.lookup(process.pid, (e, d) => {
