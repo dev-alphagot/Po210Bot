@@ -1,9 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-var bluebird = require('bluebird');
-var chance = require('chance')();
-
 var utils = require('./utils');
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
