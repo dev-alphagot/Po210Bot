@@ -28,7 +28,7 @@ rl.prompt()
 rl.on("line", (data) => {
   switch(data.split(" ")[0]){
     case "reload":
-      process.exit(-1)
+      process.exit(9)
       break
     case "debug":
       console.log(userStats)
